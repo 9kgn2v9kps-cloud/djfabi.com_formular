@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DJ Fabi – Event Fragebogen</title>
+  <meta name="description" content="DJ Fabi Event-Fragebogen für Hochzeit, Geburtstag und Events">
+  <style>
+    :root{
+      --bg:#080808;
+      --card:#141414;
+      --card2:#1d1a15;
+      --gold:#d4af37;
+      --gold2:#f4d57a;
+      --text:#f7f2e8;
+      --muted:#c9bfa9;
+      --line:rgba(212,175,55,.28);
+      --danger:#ff6961;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(212,175,55,.24),transparent 34rem),
+        radial-gradient(circle at bottom right,rgba(255,255,255,.10),transparent 30rem),
+        linear-gradient(135deg,#050505,#141414 58%,#090909);
+      color:var(--text);
+      min-height:100vh;
+    }
+    .wrap{width:min(1120px,92vw);margin:0 auto}
+    header{
+      padding:54px 0 34px;
+      text-align:center;
+    }
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 16px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--gold2);
+      background:rgba(0,0,0,.28);
+      box-shadow:0 8px 32px rgba(0,0,0,.25);
+      font-size:14px;
+      letter-spacing:.3px;
+    }
+    h1{
+      margin:22px auto 12px;
+      max-width:850px;
+      font-size:clamp(34px,6vw,72px);
+      line-height:1.02;
+      letter-spacing:-1.8px;
+    }
+    h1 span{
+      color:var(--gold2);
+      text-shadow:0 0 38px rgba(212,175,55,.25);
+    }
+    .lead{
+      max-width:760px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:clamp(17px,2vw,21px);
+      line-height:1.55;
+    }
+    .hero-card{
+      margin:34px auto 0;
+      max-width:920px;
+      padding:20px;
+      border:1px solid var(--line);
+      background:rgba(16,16,16,.76);
+      backdrop-filter:blur(18px);
+      border-radius:30px;
+      box-shadow:0 26px 80px rgba(0,0,0,.42);
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .stat{
+      padding:20px;
+      border-radius:22px;
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      text-align:center;
+    }
+    .stat strong{display:block;color:var(--gold2);font-size:24px}
+    .stat small{color:var(--muted)}
+    main{padding:22px 0 70px}
+    form{
+      max-width:980px;
+      margin:0 auto;
+      padding:28px;
+      border:1px solid var(--line);
+      border-radius:34px;
+      background:rgba(12,12,12,.82);
+      box-shadow:0 30px 90px rgba(0,0,0,.45);
+    }
+    .section{
+      margin:0 0 26px;
+      padding:24px;
+      border-radius:26px;
+      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+      border:1px solid rgba(255,255,255,.08);
+    }
+    h2{
+      margin:0 0 18px;
+      color:var(--gold2);
+      font-size:24px;
+      letter-spacing:-.3px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .full{grid-column:1/-1}
+    label{
+      display:block;
+      font-size:14px;
+      color:var(--muted);
+      margin:0 0 8px;
+    }
+    input,select,textarea{
+      width:100%;
+      border:1px solid rgba(212,175,55,.27);
+      background:#0d0d0d;
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 15px;
+      font-size:16px;
+      outline:none;
+      transition:.2s ease;
+    }
+    textarea{min-height:118px;resize:vertical}
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--gold2);
+      box-shadow:0 0 0 4px rgba(212,175,55,.12);
+    }
+    .checks{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:13px 14px;
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:16px;
+      background:rgba(255,255,255,.035);
+      color:var(--text);
+      cursor:pointer;
+    }
+    .check input{width:auto;accent-color:var(--gold)}
+    .hint{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      margin-top:12px;
+    }
+
+    /* Neue Social-Media-Leiste */
+    .social-media-bar{
+      margin:0 0 26px;
+      padding:24px;
+      border:1px solid rgba(212,175,55,.55);
+      border-radius:26px;
+      background:
+        linear-gradient(135deg,rgba(212,175,55,.13),rgba(255,255,255,.025)),
+        rgba(18,18,18,.92);
+      box-shadow:0 16px 45px rgba(0,0,0,.24);
+    }
+    .social-media-bar h2{margin-bottom:10px}
+    .social-question{
+      margin:0 0 18px;
+      color:var(--text);
+      font-size:16px;
+      line-height:1.55;
+    }
+    .social-options{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .social-options-two{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .social-option{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      min-height:84px;
+      margin:0;
+      padding:14px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      background:rgba(0,0,0,.24);
+      color:var(--text);
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .social-option:hover{
+      border-color:rgba(212,175,55,.58);
+      transform:translateY(-1px);
+    }
+    .social-option:has(input:checked){
+      border-color:var(--gold2);
+      background:rgba(212,175,55,.12);
+      box-shadow:0 0 0 3px rgba(212,175,55,.08);
+    }
+    .social-option input{
+      width:auto;
+      margin:3px 0 0;
+      accent-color:var(--gold);
+      flex:0 0 auto;
+    }
+    .social-option span{
+      line-height:1.45;
+      font-size:14px;
+    }
+    .social-hint{
+      margin:14px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .submit-area{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      padding:8px 4px 0;
+    }
+    button{
+      border:0;
+      cursor:pointer;
+      padding:16px 24px;
+      border-radius:999px;
+      color:#15110a;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      font-size:17px;
+      font-weight:800;
+      box-shadow:0 16px 40px rgba(212,175,55,.22);
+      transition:.2s ease;
+    }
+    button:hover{
+      transform:translateY(-2px);
+      box-shadow:0 22px 55px rgba(212,175,55,.28);
+    }
+    .privacy{
+      max-width:640px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .privacy-box{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:14px 16px;
+      margin-top:14px;
+      border:1px solid rgba(212,175,55,.27);
+      border-radius:16px;
+      background:rgba(255,255,255,.035);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .privacy-box input{
+      width:auto;
+      margin-top:3px;
+      accent-color:var(--gold);
+    }
+    footer{
+      text-align:center;
+      color:var(--muted);
+      padding:0 0 42px;
+      font-size:14px;
+    }
+    a{color:var(--gold2)}
+    @media(max-width:780px){
+      header{padding-top:34px}
+      .grid,.stats,.checks,.social-options{grid-template-columns:1fr}
+      form{padding:16px;border-radius:24px}
+      .section,.social-media-bar{padding:18px;border-radius:20px}
+      .submit-area{display:block}
+      button{width:100%;margin-top:12px}
+      .social-option{min-height:auto}
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="badge">🎧 Hochzeit &amp; Event DJ Fabi</div>
+    <h1>Euer persönlicher <span>DJ Fragebogen</span></h1>
+    <p class="lead">Damit ich eure Hochzeit, euren Geburtstag oder euer Event perfekt musikalisch vorbereiten kann, füllt bitte dieses Formular aus. Nach dem Absenden bekomme ich alles direkt per E-Mail.</p>
+    <div class="hero-card">
+      <div class="stats">
+        <div class="stat"><strong>1</strong><small>Eventdaten eintragen</small></div>
+        <div class="stat"><strong>2</strong><small>Musikwünsche angeben</small></div>
+        <div class="stat"><strong>3</strong><small>Direkt an DJ Fabi senden</small></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <form action="https://formsubmit.co/djfabi7@web.de" method="POST">
+      <input type="hidden" name="_subject" value="🎧 Neuer DJ Anfragebogen von Website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_autoresponse" value="Vielen Dank für eure Anfrage! Ich habe euren DJ-Fragebogen erhalten und melde mich schnellstmöglich bei euch. 🎧 DJ Fabi">
+      <input type="text" name="_honey" style="display:none">
+
+      <section class="section">
+        <h2>👤 Kundendaten</h2>
+        <div class="grid">
+          <div>
+            <label>Name(n) *</label>
+            <input name="Name" required>
+          </div>
+          <div>
+            <label>E-Mail *</label>
+            <input type="email" name="email" required>
+          </div>
+          <div>
+            <label>Telefon / Mobil *</label>
+            <input name="Telefon" required>
+          </div>
+          <div>
+            <label>Straße</label>
+            <input name="Straße">
+          </div>
+          <div>
+            <label>PLZ / Ort</label>
+            <input name="PLZ Ort">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>📅 Veranstaltungsdaten</h2>
+        <div class="grid">
+          <div>
+            <label>Anlass *</label>
+            <select name="Anlass" required>
+              <option value="">Bitte auswählen</option>
+              <option>Hochzeit</option>
+              <option>Geburtstag</option>
+              <option>Firmenevent</option>
+              <option>Sonstiges Event</option>
+            </select>
+          </div>
+          <div>
+            <label>Datum der Veranstaltung *</label>
+            <input type="date" name="Datum" required>
+          </div>
+          <div>
+            <label>Anzahl Gäste ca.</label>
+            <input type="number" name="Gästeanzahl" min="1">
+          </div>
+          <div>
+            <label>Durchschnittsalter der Gäste</label>
+            <input name="Durchschnittsalter">
+          </div>
+          <div class="full">
+            <label>Location / Ort der Veranstaltung *</label>
+            <input name="Location" required>
+          </div>
+          <div>
+            <label>Beginn</label>
+            <input type="time" name="Beginn">
+          </div>
+          <div>
+            <label>Ende ca.</label>
+            <input type="time" name="Ende">
+          </div>
+        </div>
+
+        <p class="hint">Veranstaltungsart</p>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="Veranstaltungsart" value="Indoor"> Indoor</label>
+          <label class="check"><input type="checkbox" name="Veranstaltungsart" value="Outdoor"> Outdoor</label>
+        </div>
+
+        <p class="hint">Technik gewünscht</p>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="Technik" value="Sound"> Sound</label>
+          <label class="check"><input type="checkbox" name="Technik" value="Licht"> Licht</label>
+          <label class="check"><input type="checkbox" name="Technik" value="Nebel"> Nebel</label>
+          <label class="check"><input type="checkbox" name="Technik" value="Sonstiges"> Sonstiges</label>
+        </div>
+      </section>
+
+
+      <section class="section">
+        <h2>📞 Ansprechpartner &amp; Trauzeugen</h2>
+        <p class="hint">Bitte gebt eine Person an, die am Veranstaltungstag bei organisatorischen Fragen erreichbar ist.</p>
+        <div class="grid">
+          <div>
+            <label>Ansprechpartner am Veranstaltungstag</label>
+            <input name="Ansprechpartner am Veranstaltungstag" placeholder="Vor- und Nachname">
+          </div>
+          <div>
+            <label>Telefon Ansprechpartner</label>
+            <input type="tel" name="Telefon Ansprechpartner" placeholder="Mobilnummer">
+          </div>
+
+          <div>
+            <label>Trauzeuge / Trauzeugin 1</label>
+            <input name="Trauzeuge 1" placeholder="Vor- und Nachname">
+          </div>
+          <div>
+            <label>Telefon Trauzeuge / Trauzeugin 1</label>
+            <input type="tel" name="Telefon Trauzeuge 1" placeholder="Mobilnummer">
+          </div>
+
+          <div>
+            <label>Trauzeuge / Trauzeugin 2</label>
+            <input name="Trauzeuge 2" placeholder="Vor- und Nachname">
+          </div>
+          <div>
+            <label>Telefon Trauzeuge / Trauzeugin 2</label>
+            <input type="tel" name="Telefon Trauzeuge 2" placeholder="Mobilnummer">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>🎶 Musikplanung</h2>
+        <div class="grid">
+          <div class="full">
+            <label>Welche Hintergrundmusik soll gespielt werden?</label>
+            <textarea name="Hintergrundmusik"></textarea>
+          </div>
+          <div class="full">
+            <label>Welche Tanzmusik / Musikrichtung soll zur Party gespielt werden?</label>
+            <textarea name="Tanzmusik Musikrichtung"></textarea>
+          </div>
+          <div>
+            <label>Dürfen Musikwünsche der Gäste gespielt werden?</label>
+            <select name="Musikwünsche der Gäste">
+              <option>Ja</option>
+              <option>Nein</option>
+              <option>Nach Absprache</option>
+            </select>
+          </div>
+          <div>
+            <label>Hochzeitstanz – Interpret / Titel</label>
+            <input name="Hochzeitstanz">
+          </div>
+          <div>
+            <label>Hochzeitstorte / Brautstrauß / Sonstiges</label>
+            <input name="Hochzeitsmomente">
+          </div>
+          <div class="full">
+            <label>Hier könnt ihr eure Spotify-Playlist teilen</label>
+            <input type="url" name="Spotify Playlist Link" placeholder="https://open.spotify.com/playlist/...">
+          </div>
+          <div class="full">
+            <label>Musikwünsche, die auf jeden Fall gespielt werden sollen</label>
+            <textarea name="Must Play Songs"></textarea>
+          </div>
+          <div class="full">
+            <label>Musik / Songs, die auf keinen Fall gespielt werden sollen</label>
+            <textarea name="No Go Songs"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>📝 Ablauf &amp; besondere Wünsche</h2>
+        <div class="grid">
+          <div class="full">
+            <label>Programmablauf mit ca. Uhrzeit</label>
+            <textarea name="Programmablauf"></textarea>
+          </div>
+          <div class="full">
+            <label>Anmerkungen, Notizen oder spezielle Wünsche</label>
+            <textarea name="Besondere Wünsche"></textarea>
+          </div>
+          <div>
+            <label>Bezahlung</label>
+            <select name="Bezahlung">
+              <option>Bar</option>
+              <option>Rechnung</option>
+              <option>Nach Absprache</option>
+            </select>
+          </div>
+          <div>
+            <label>Wie seid ihr auf mich aufmerksam geworden?</label>
+            <select name="Gefunden über">
+              <option>Internet / Webseite</option>
+              <option>Empfehlung</option>
+              <option>Instagram</option>
+              <option>Facebook</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="social-media-bar">
+        <h2>📸 Fotos &amp; Videos für Social Media</h2>
+        <p class="social-question">
+          Darf DJ Fabi während der Veranstaltung Fotos und kurze Videos von der Stimmung aufnehmen und auf seiner Website sowie seinen Social-Media-Kanälen veröffentlichen? *
+        </p>
+        <div class="social-options social-options-two">
+          <label class="social-option">
+            <input type="radio" name="Social-Media-Freigabe" value="Ja, Fotos und Videos dürfen aufgenommen und veröffentlicht werden" required>
+            <span><strong>Ja</strong><br>Fotos und Videos dürfen aufgenommen und veröffentlicht werden.</span>
+          </label>
+          <label class="social-option">
+            <input type="radio" name="Social-Media-Freigabe" value="Nein, keine Aufnahmen oder Veröffentlichungen für Social Media" required>
+            <span><strong>Nein</strong><br>Bitte keine Aufnahmen oder Veröffentlichungen für Website oder Social Media.</span>
+          </label>
+        </div>
+        <p class="social-hint">Die Auswahl kann vor der Veranstaltung jederzeit noch geändert werden.</p>
+      </section>
+
+      <div class="submit-area">
+        <div class="privacy">
+          <p><strong>Datenschutzhinweis:</strong> Die eingegebenen Daten werden ausschließlich zur Vorbereitung und Bearbeitung eurer DJ-Anfrage beziehungsweise Veranstaltung verwendet und per E-Mail an DJ Fabi übermittelt. Die Übermittlung erfolgt über den Formular-Dienst FormSubmit. Bitte tragt keine besonders sensiblen Daten ein.</p>
+          <label class="privacy-box">
+            <input type="checkbox" name="DSGVO Einwilligung" value="Einwilligung erteilt" required>
+            <span>Ich bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verarbeitet werden. Mir ist bekannt, dass ich diese Einwilligung jederzeit für die Zukunft widerrufen kann.</span>
+          </label>
+        </div>
+        <button type="submit">Fragebogen an DJ Fabi senden →</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="wrap">
+    Hochzeit &amp; Event DJ Fabi · <a href="mailto:djfabi7@web.de">djfabi7@web.de</a>
+  </footer>
+</body>
+</html>
